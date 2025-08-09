@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Amazon Affiliate Blog</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background: #1b112e;
+      color: white;
+      text-align: left;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 20px auto;
+      padding: 20px;
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .product {
+      border-bottom: 1px solid #ddd;
+      padding: 15px 0;
+    }
+
+    .product img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 6px;
+      display: block;
+    }
+
+    .buy-btn {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 10px 15px;
+      background: #ffa41c;
+      color: black;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .buy-btn:hover {
+      background: #ff8c00;
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.5rem;
+      }
+    }
+    nav {
+            margin-top: 10px;
+            text-align: right;
+        }
+        nav a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Welcome to Great Deals</h1>
+  <nav>
+        <a href="index.html">Home</a>
+        <a href="gadgets.html">Gadgets</a>
+        <a href="fashion.html">Fashion</a>
+        <a href="products.html">All Products</a>
+    </nav>
+</header>
+
+<main class="container">
+  <input 
+    type="text" 
+    id="search" 
+    class="search-box" 
+    placeholder="Search for products..." >
+  <div id="product-list"></div>
+</main>
+
+<footer style="background:#1b112e;color:white;text-align:center;padding:15px;margin-top:30px;">
+  &copy; 2025 My Amazon Affiliate Blog <br>
+  <small>Disclosure: As an Amazon Associate I earn from qualifying purchases.</small>
+</footer>
+
+<script>
+  // Product Data
+  const products = [
+    {
+      title: "Top Gadgets",
+      description: "Top selling Amazon gadgets that are trending right now.",
+      image: "https://m.media-amazon.com/images/G/31/img22/pcacc/bau/COMPUTERACC.png",
+      link: "https://amzn.to/4mAGaJt"
+    },
+    {
+      title: "Best Fashion Picks",
+      description: "Latest trending fashion products you’ll love.",
+      image: "fashion.png",
+      link: "https://amzn.to/41Aab3P"
+    },
+    {
+      title: "Kitchen Essentials",
+      description: "Best kitchen tools for everyday cooking.",
+      image: "kitchen.png",
+      link: "https://amzn.to/3HtlN1P"
+    }
+  ];
+
+  const container = document.getElementById('product-list');
+  const searchInput = document.getElementById('search');
+
+  function displayProducts(list) {
+    container.innerHTML = "";
+    list.forEach(product => {
+      const productHTML = `
+        <article class="product">
+          <h2>${product.title}</h2>
+          <a href="${product.link}" target="_blank" rel="nofollow">
+            <img src="${product.image}" alt="${product.title}" loading="lazy">
+          </a>
+          <p>${product.description}</p>
+          <a class="buy-btn" href="${product.link}" target="_blank">View</a>
+        </article>
+      `;
+      container.innerHTML += productHTML;
+    });
+  }
+
+  searchInput.addEventListener('input', () => {
+    const keyword = searchInput.value.toLowerCase();
+    const filtered = products.filter(p => 
+      p.title.toLowerCase().includes(keyword) || 
+      p.description.toLowerCase().includes(keyword)
+    );
+    displayProducts(filtered);
+  });
+
+  // Initial Load
+  displayProducts(products);
+</script>
+
+</body>
+</html>
